@@ -1,12 +1,12 @@
 import React from 'react';
 import TextFilter from './TextFilter';
-import NumericFilter from './NumericFilter';
+import Filters from './Filters';
 
 function TableFilters() {
   return (
     <div className="filter">
       <TextFilter />
-      <NumericFilter />
+      <Filters />
     </div>
   );
 }

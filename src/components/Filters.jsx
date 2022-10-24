@@ -12,27 +12,6 @@ function NumericFilter() {
     handleClick,
   } = useContext(AppContext);
 
-  // const handleClick = () => {
-  //   const index = colunmData.findIndex((e) => e === column);
-  //   const remove = colunmData.splice(index, 1);
-  //   console.log(remove);
-  //   setColunmData(colunmData);
-  //   switch (comparison) {
-  //   case 'maior que':
-  //     return setData(data
-  //       .filter((planet) => Number(planet[column]) > Number(valor)));
-  //   case 'menor que':
-  //     return setData(data
-  //       .filter((planet) => Number(planet[column]) < Number(valor)));
-  //   case 'igual a':
-  //     return setData(
-  //       data.filter((planet) => planet[column] === valor),
-  //     );
-  //   default:
-  //     return data;
-  //   }
-  // };
-
   return (
     <main>
       <select
