@@ -5,6 +5,9 @@ import AppContext from './appContext';
 function Provider({ children }) {
   const [data, setData] = useState([]);
   const [name, setPlanet] = useState('');
+  const [column, setColumn] = useState('population');
+  const [comparison, setNumericFilters] = useState('maior que');
+  const [valor, setValue] = useState('0');
 
   const endpoint = 'https://swapi.dev/api/planets';
 
@@ -22,11 +25,32 @@ function Provider({ children }) {
     setPlanet(value);
   };
 
+  const handleNumericFilters = ({ target }) => {
+    const { value } = target;
+    setNumericFilters(value);
+  };
+
+  const handleNumeric = ({ target }) => {
+    const { value } = target;
+    setValue(value);
+  };
+  const handleColumnFilters = ({ target }) => {
+    const { value } = target;
+    setColumn(value);
+  };
+
   const allContext = useMemo(() => ({
     data,
     searchName,
     name,
-  }), [data, name]);
+    setData,
+    handleNumericFilters,
+    comparison,
+    handleColumnFilters,
+    column,
+    handleNumeric,
+    valor,
+  }), [data, name, comparison, column, valor]);
 
   return (
     <AppContext.Provider value={ allContext }>
