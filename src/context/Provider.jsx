@@ -1,11 +1,19 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import AppContext from './appContext';
 
 function Provider({ children }) {
+  const initialColumnData = [
+    'population',
+    'orbital_period',
+    'diameter',
+    'rotation_period',
+    'surface_water',
+  ];
+  const [colunmData, setColunmData] = useState(initialColumnData);
   const [data, setData] = useState([]);
   const [name, setPlanet] = useState('');
-  const [column, setColumn] = useState('population');
+  const [column, setColumn] = useState(colunmData[0]);
   const [comparison, setNumericFilters] = useState('maior que');
   const [valor, setValue] = useState('0');
 
@@ -39,6 +47,27 @@ function Provider({ children }) {
     setColumn(value);
   };
 
+  const handleClick = useCallback(() => {
+    const filter = colunmData.findIndex((index) => index === column);
+    const deletefilter = colunmData.splice(filter, 1);
+    setColunmData(colunmData);
+    console.log(deletefilter);
+    switch (comparison) {
+    case 'maior que':
+      return setData(data
+        .filter((planet) => Number(planet[column]) > Number(valor)));
+    case 'menor que':
+      return setData(data
+        .filter((planet) => Number(planet[column]) < Number(valor)));
+    case 'igual a':
+      return setData(
+        data.filter((planet) => planet[column] === valor),
+      );
+    default:
+      return data;
+    }
+  }, [column, colunmData, data, valor, comparison]);
+
   const allContext = useMemo(() => ({
     data,
     searchName,
@@ -50,7 +79,10 @@ function Provider({ children }) {
     column,
     handleNumeric,
     valor,
-  }), [data, name, comparison, column, valor]);
+    colunmData,
+    setColunmData,
+    handleClick,
+  }), [data, name, comparison, column, valor, colunmData, handleClick]);
 
   return (
     <AppContext.Provider value={ allContext }>

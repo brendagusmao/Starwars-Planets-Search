@@ -7,27 +7,31 @@ function NumericFilter() {
     column,
     handleColumnFilters,
     valor,
-    setData,
-    data,
     handleNumeric,
+    colunmData,
+    handleClick,
   } = useContext(AppContext);
 
-  const handleClick = () => {
-    switch (comparison) {
-    case 'maior que':
-      return setData(data
-        .filter((planet) => Number(planet[column]) > Number(valor)));
-    case 'menor que':
-      return setData(data
-        .filter((planet) => Number(planet[column]) < Number(valor)));
-    case 'igual a':
-      return setData(
-        data.filter((planet) => planet[column] === valor),
-      );
-    default:
-      return data;
-    }
-  };
+  // const handleClick = () => {
+  //   const index = colunmData.findIndex((e) => e === column);
+  //   const remove = colunmData.splice(index, 1);
+  //   console.log(remove);
+  //   setColunmData(colunmData);
+  //   switch (comparison) {
+  //   case 'maior que':
+  //     return setData(data
+  //       .filter((planet) => Number(planet[column]) > Number(valor)));
+  //   case 'menor que':
+  //     return setData(data
+  //       .filter((planet) => Number(planet[column]) < Number(valor)));
+  //   case 'igual a':
+  //     return setData(
+  //       data.filter((planet) => planet[column] === valor),
+  //     );
+  //   default:
+  //     return data;
+  //   }
+  // };
 
   return (
     <main>
@@ -37,11 +41,10 @@ function NumericFilter() {
         value={ column }
         onChange={ handleColumnFilters }
       >
-        <option value="population">population</option>
-        <option value="orbital_period">orbital_period</option>
-        <option value="diameter">diameter</option>
-        <option value="rotation_period">rotation_period</option>
-        <option value="surface_water">surface_water</option>
+        { colunmData
+          .map((item, i) => (
+            <option key={ i } value={ item }>{ item }</option>
+          ))}
       </select>
 
       <select
