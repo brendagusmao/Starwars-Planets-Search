@@ -51,9 +51,9 @@ function Provider({ children }) {
     setColumn(value);
   };
 
-  const handleSort = useCallback(({ target: { value } }) => {
-    setSort(value);
-  }, []);
+  // const handleSort = useCallback(({ target: { value } }) => {
+  //   setSort(value);
+  // }, []);
 
   const handleClick = useCallback(() => {
     switch (comparison) {
@@ -86,21 +86,7 @@ function Provider({ children }) {
         : b[select] - a[select]));
     setData([...filterdiferent, ...filterequal]);
   }, [teste, data, select]);
-
-  const handleDeleteFilters = useCallback(() => {
-    setFilteredPlanets([]);
-    setColumn(colunmData[0]);
-    setNumericFilters('maior que');
-    setValue('0');
-    setData([]);
-  }, [colunmData]);
-  // const clickToOrderList = useCallback(() => {
-  //   const { colum, column } = order;
-  //   let newList = [];
-  //   if (column === 'ASC') {
-  //     newList = orderAscendent(colum, data);
-  //   }
-  //  }, [order, data, orderAscendent]);
+  
   const allContext = useMemo(() => ({
     data,
     searchName,
@@ -121,10 +107,8 @@ function Provider({ children }) {
     handleOrderSort,
     teste,
     setest,
-    handleSort,
     select,
     setSelect,
-    handleDeleteFilters,
     filteredPlanets,
     setFilteredPlanets,
   }), [data,
@@ -140,10 +124,8 @@ function Provider({ children }) {
     handleOrderSort,
     teste,
     setest,
-    handleSort,
     select,
     setSelect,
-    handleDeleteFilters,
     filteredPlanets, setFilteredPlanets,
   ]);
 
