@@ -56,10 +56,6 @@ function Provider({ children }) {
   }, []);
 
   const handleClick = useCallback(() => {
-    const filter = colunmData.findIndex((index) => index === column);
-    const deletefilter = colunmData.splice(filter, 1);
-    setColunmData(colunmData);
-    console.log(deletefilter);
     switch (comparison) {
     case 'maior que':
       return setData(data
@@ -74,7 +70,7 @@ function Provider({ children }) {
     default:
       return data;
     }
-  }, [column, colunmData, data, valor, comparison]);
+  }, [column, data, valor, comparison]);
 
   const handleOrderChange = useCallback(({ target }) => {
     const { value } = target;
