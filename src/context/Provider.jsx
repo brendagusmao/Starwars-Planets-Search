@@ -51,11 +51,10 @@ function Provider({ children }) {
     setColumn(value);
   };
 
-  // const handleSort = useCallback(({ target: { value } }) => {
-  //   setSort(value);
-  // }, []);
-
   const handleClick = useCallback(() => {
+    const valueFilter = colunmData.filter((element) => element !== column);
+    setColunmData(valueFilter);
+    setColumn(valueFilter[0]);
     switch (comparison) {
     case 'maior que':
       return setData(data
@@ -70,7 +69,7 @@ function Provider({ children }) {
     default:
       return data;
     }
-  }, [column, data, valor, comparison]);
+  }, [column, data, valor, comparison, colunmData]);
 
   const handleOrderChange = useCallback(({ target }) => {
     const { value } = target;
@@ -126,7 +125,8 @@ function Provider({ children }) {
     setest,
     select,
     setSelect,
-    filteredPlanets, setFilteredPlanets,
+    filteredPlanets,
+    setFilteredPlanets,
   ]);
 
   return (
