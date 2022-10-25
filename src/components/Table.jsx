@@ -27,7 +27,7 @@ export default function Table() {
           data?.filter((el) => el.name.includes(name))
             .map((e, i) => (
               <tr key={ i.planet }>
-                <td>{e.name}</td>
+                <td data-testid="planet-name">{e.name}</td>
                 <td>{e.rotation_period}</td>
                 <td>{e.orbital_period}</td>
                 <td>{e.diameter}</td>

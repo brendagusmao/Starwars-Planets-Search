@@ -12,11 +12,14 @@ function Provider({ children }) {
   ];
   const [colunmData, setColunmData] = useState(initialColumnData);
   const [data, setData] = useState([]);
+  const [filteredPlanets, setFilteredPlanets] = useState([]);
   const [name, setPlanet] = useState('');
   const [column, setColumn] = useState(colunmData[0]);
   const [comparison, setNumericFilters] = useState('maior que');
   const [valor, setValue] = useState('0');
-
+  const [order, setOrder] = useState({ column: 'population', sort: 'ASC' });
+  const [teste, setest] = useState(colunmData[0]);
+  const [select, setSelect] = useState('population');
   const endpoint = 'https://swapi.dev/api/planets';
 
   useEffect(() => {
@@ -42,10 +45,15 @@ function Provider({ children }) {
     const { value } = target;
     setValue(value);
   };
+
   const handleColumnFilters = ({ target }) => {
     const { value } = target;
     setColumn(value);
   };
+
+  const handleSort = useCallback(({ target: { value } }) => {
+    setSort(value);
+  }, []);
 
   const handleClick = useCallback(() => {
     const filter = colunmData.findIndex((index) => index === column);
@@ -68,6 +76,35 @@ function Provider({ children }) {
     }
   }, [column, colunmData, data, valor, comparison]);
 
+  const handleOrderChange = useCallback(({ target }) => {
+    const { value } = target;
+    setSelect(value);
+  }, []);
+
+  const handleOrderSort = useCallback(() => {
+    const sort = teste;
+    const filterequal = [...data].filter((obj) => obj[select] === 'unknown');
+    const filterdiferent = [...data].filter((obj) => obj[select] !== 'unknown');
+    filterdiferent.sort((a, b) => (
+      sort === 'ASC' ? a[select] - b[select]
+        : b[select] - a[select]));
+    setData([...filterdiferent, ...filterequal]);
+  }, [teste, data, select]);
+
+  const handleDeleteFilters = useCallback(() => {
+    setFilteredPlanets([]);
+    setColumn(colunmData[0]);
+    setNumericFilters('maior que');
+    setValue('0');
+    setData([]);
+  }, [colunmData]);
+  // const clickToOrderList = useCallback(() => {
+  //   const { colum, column } = order;
+  //   let newList = [];
+  //   if (column === 'ASC') {
+  //     newList = orderAscendent(colum, data);
+  //   }
+  //  }, [order, data, orderAscendent]);
   const allContext = useMemo(() => ({
     data,
     searchName,
@@ -82,7 +119,37 @@ function Provider({ children }) {
     colunmData,
     setColunmData,
     handleClick,
-  }), [data, name, comparison, column, valor, colunmData, handleClick]);
+    order,
+    setOrder,
+    handleOrderChange,
+    handleOrderSort,
+    teste,
+    setest,
+    handleSort,
+    select,
+    setSelect,
+    handleDeleteFilters,
+    filteredPlanets,
+    setFilteredPlanets,
+  }), [data,
+    name,
+    comparison,
+    column,
+    valor,
+    colunmData,
+    order,
+    handleClick,
+    setOrder,
+    handleOrderChange,
+    handleOrderSort,
+    teste,
+    setest,
+    handleSort,
+    select,
+    setSelect,
+    handleDeleteFilters,
+    filteredPlanets, setFilteredPlanets,
+  ]);
 
   return (
     <AppContext.Provider value={ allContext }>
