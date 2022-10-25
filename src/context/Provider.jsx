@@ -86,7 +86,7 @@ function Provider({ children }) {
         : b[select] - a[select]));
     setData([...filterdiferent, ...filterequal]);
   }, [teste, data, select]);
-  
+
   const allContext = useMemo(() => ({
     data,
     searchName,
