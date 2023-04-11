@@ -86,18 +86,6 @@ function Provider({ children }) {
     setData([...filterdiferent, ...filterequal]);
   }, [teste, data, select]);
 
-  const getSavedState = () => JSON.parse(localStorage.getItem('portfolio'))?.lightMode;
-
-  const [lightMode, setLightMode] = useState(getSavedState() || false);
-
-  const values = { lightMode, setLightMode };
-
-  useEffect(() => {
-    lightMode
-      ? document.body.classList.remove('dark') : document.body.classList.add('dark');
-    localStorage.setItem('portfolio', JSON.stringify({ lightMode }));
-  }, [lightMode]);
-
   const allContext = useMemo(() => ({
     data,
     searchName,
@@ -140,7 +128,6 @@ function Provider({ children }) {
     setSelect,
     filteredPlanets,
     setFilteredPlanets,
-    values,
   ]);
 
   return (
