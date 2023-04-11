@@ -7,8 +7,10 @@ import TableFilters from './components/TableFilters';
 function App() {
   return (
     <Provider>
-      <TableFilters />
-      <Table />
+      <div className="main">
+        <TableFilters />
+        <Table />
+      </div>
     </Provider>
   );
 }

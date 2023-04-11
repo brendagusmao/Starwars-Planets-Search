@@ -26,7 +26,7 @@ function NumericFilter() {
   } = useContext(AppContext);
 
   return (
-    <main>
+    <section className="barsection">
       <select
         data-testid="column-filter"
         name="column"
@@ -106,7 +106,7 @@ function NumericFilter() {
       >
         Remover filtros
       </button>
-    </main>
+    </section>
   );
 }
 

@@ -12,6 +12,7 @@ function TextFilter() {
       onChange={ searchName }
       value={ name }
       placeholder=" Pesquise um Planeta"
+      className="inputName"
     />
   );
 }
