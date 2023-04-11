@@ -110,7 +110,7 @@ function Provider({ children }) {
     setSelect,
     filteredPlanets,
     setFilteredPlanets,
-    values,
+    // values,
   }), [data,
     name,
     comparison,
